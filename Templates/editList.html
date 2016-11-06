@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset='utf-8'>
+	<title>Edit List</title>
+</head>
+<body>
+	<a href='/admin'>Home Page</a><br><br>
+	<a href='/view'>View Lists</a><br><br>
+	<h1>Edit List</h1>
+	<form method="POST" action="{{ edit_url }}">
+		<input type="hidden" name="action" value="edit_list">
+		<label>Change List Name: </label>
+		<input type="text" name="list-name" value="{{ list.name }}" required><br><br>
+		<label>1: </label>
+		<input type="text" name="one" value="{{ list.one }}" required><br><br>
+		<label>2: </label>
+		<input type="text" name="two" value="{{ list.two }}" required><br><br>
+		<label>3: </label>
+		<input type="text" name="three" value="{{ list.three }}" required><br><br>
+		<label>4: </label>
+		<input type="text" name="four" value="{{ list.four }}" required><br><br>
+		<label>5: </label>
+		<input type="text" name="five" value="{{ list.five }}" required><br><br>
+		<label>Enter your email: </label>
+		<input type="E-mail" name="email" value="{{ list.email }} required">
+		<br>
+		<label>Display email with list?</label>
+		<input type="radio" name="disEmail" value="yes" {{ yes }}>Yes
+		<input type="radio" name="disEmail" value="no" {{ no }}>No
+		<br>
+		<br>
+	
+		{% if categories|length > 0 %}
+		<fieldset>
+			<legend>List Categories</legend>
+			{% for c in categories %}
+			<label> {{ c.name}} </label><input type="checkbox" name="categories[]" value="{{ c.key }}" {% if c.checked %}checked="{{ c.checked }}" {%endif %}>
+			{% endfor %}
+		</fieldset>
+		{% endif %}
+		<input type="submit" value="update">
+	</form>
+	{% if message %}
+	<section>
+		<h3>Result</h3>
+		<p>{{ message }}
+	</section>
+	{% endif %}
+</body>
+</html>

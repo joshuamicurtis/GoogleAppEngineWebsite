@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset='utf-8'>
+	<title>Top 5</title>
+</head>
+<body>
+	<a href='/view'>View Lists</a><br><br>
+	<h1>Top 5</h1>
+	<h2>Create a New Top 5 List</h2> 
+	<form action="/admin" method="post">
+		<legend>Create a New Category</legend>
+		<input type="hidden" name="action" value="new_category">
+		<fieldset>
+			<label>Category Name: </label>
+			<input type="text" name="category-name" required>
+			<input type="submit" value="create">
+		</fieldset>
+	</form>
+	<br>
+	<form action="/admin" method="post">
+		{% if categories|length > 0 %}
+		<input type="hidden" name="action" value="new_list">	
+			<legend>Choose Categories</legend>
+			<fieldset>
+				{% for c in categories %}
+				<label> {{ c.name }} </label><input type="checkbox" name="categories[]" value="{{ c.key }}">
+				{% endfor %}
+			</fieldset>
+		{% endif %}
+		<br>
+		<fieldset>
+			<legend>Enter Your Top Five</legend><br>
+			<label>List Name: </label>
+			<input type="text" name="list-name" required><br><br>
+			<label>1: </label>
+			<input type="text" name="one" required><br><br>
+			<label>2: </label>
+			<input type="text" name="two" required><br><br>
+			<label>3: </label>
+			<input type="text" name="three" required><br><br>
+			<label>4: </label>
+			<input type="text" name="four" required><br><br>
+			<label>5: </label>
+			<input type="text" name="five" required><br><br>
+			<label>Enter your email: </label>
+			<input type="E-mail" name="email" required>
+			<br>
+			<label>Display email with list?</label>
+			<input type="radio" name="disEmail" value="yes">Yes
+			<input type="radio" name="disEmail" value="no" checked>No
+			<br>
+			<br>
+			<input type="submit" value="Submit list">
+			<input type="reset" value="clear form">
+			</fieldset>
+			<br>
+	</form>
+	<a href='/view'>View Lists</a><br><br>
+	{% if lists|length > 0 %}
+	<fieldset>
+	<section>
+		<h2>Edit List</h2>
+			{% for list in lists %}
+			<a href='/edit?key={{ list.key }}&type=lists'>{{ list.name }}</a>
+			{% endfor %}
+	</section>
+	</fieldset>
+	{% endif %}
+	{% if message %}
+	<section>
+		<h3>Result</h3>
+		<p>{{ message }}
+	</section>
+	{% endif %}
+	{% if message2 %}
+	<section>
+		<p>{{ message2 }}
+	</section>
+	{% endif %}
+</body>
+</html>

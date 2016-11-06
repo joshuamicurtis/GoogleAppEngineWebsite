@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset='utf-8'>
+	<title>View Top 5s</title>
+</head>
+<body>
+	<a href='/admin'>Home Page</a><br><br>
+	<h1>View Top 5s</h1>
+	{% if lists|length > 0 %}
+		{% for l in lists %}
+			<fieldset>
+			{% if l.disEmail == "yes" %}
+			<p>By {{ l.email }}</p>
+			{% endif %}
+			<h3> {{ l.name }} </h3>
+			<p>1. {{ l.one }}</p>
+			<p>2. {{ l.two }}</p>
+			<p>3. {{ l.three }}</p>
+			<p>4. {{ l.four }}</p>
+			<p>5. {{ l.five }}</p>
+			</fieldset>
+		{% endfor %}
+	{% endif %}
+</body>
+</html>
